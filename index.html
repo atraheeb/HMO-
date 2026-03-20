@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تهنئة عيد</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  height: 100vh;
+  background: radial-gradient(circle at top, #0a0f2c, #000);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* النجوم */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #00ccff;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {opacity:0.2;}
+  to {opacity:1;}
+}
+
+/* صندوق التهنئة */
+.container {
+  z-index: 2;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+.box {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0,200,255,0.4);
+}
+
+/* النص */
+.text {
+  font-size: 22px;
+  min-height: 50px;
+}
+
+/* الزر */
+.button {
+  margin-top: 15px;
+  display: none;
+  padding: 10px;
+  background: linear-gradient(45deg,#00ccff,#0066ff);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* popup */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: rgba(0,0,0,0.95);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 25px #00ccff;
+  transition: 0.3s;
+  width: 90%;
+  max-width: 350px;
+  z-index: 10;
+}
+
+.popup.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* زر X */
+.close {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #00ccff;
+}
+
+/* العنوان */
+.title {
+  color: #00ccff;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* الصورة */
+.popup img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+/* نص السادس */
+.warning {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #ccc;
+}
+
+/* الفوتر */
+.footer {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer a {
+  color: #00ccff;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+  <div class="box">
+    <div class="text" id="text"></div>
+    <div class="button" id="btn">افتحوا التهنئة</div>
+  </div>
+</div>
+
+<!-- popup -->
+<div class="popup" id="popup">
+  <div class="close" id="close">×</div>
+
+  <div class="title">اخي حمودي ❤️</div>
+
+  <img src="https://i.ibb.co/BVMcMzVk/IMG-1969.png">
+
+  <div class="warning">
+    الذهب 😘
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://t.me/Ali_3hme" target="_blank">عـــلـــي ¹</a> - Developer
+</div>
+
+<script>
+// النجوم
+for (let i = 0; i < 120; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random()*100+"%";
+  star.style.left = Math.random()*100+"%";
+  document.getElementById("stars").appendChild(star);
+}
+
+// كتابة سريعة
+const text = "عيدك مبارك اخي  حمادة كل عام وأنت بألف خير وصحة وسلامة
+انشاء الله أيامك كلها أفراح وسعادة،
+ و تحقق لك كل  ما تتمنى ويكتب لك التوفيق في كل خطوة ❤️";
+let i = 0;
+function type() {
+  if(i < text.length){
+    document.getElementById("text").innerHTML += text[i];
+    i++;
+    setTimeout(type, 40);
+  } else {
+    document.getElementById("btn").style.display = "block";
+  }
+}
+type();
+
+// فتح popup
+document.getElementById("btn").onclick = () => {
+  document.getElementById("popup").classList.add("show");
+};
+
+// اغلاق popup
+document.getElementById("close").onclick = () => {
+  document.getElementById("popup").classList.remove("show");
+};
+</script>
+
+</body>
+</html>
